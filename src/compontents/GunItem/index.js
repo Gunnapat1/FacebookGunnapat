@@ -1,26 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text, StyleSheet, TouchableOpacity,Image,Modal} from 'react-native';
 import Icon from 'react-native-vector-icons/Fontisto';
+import { Images } from '@config';
 
-
-const Gunitem = props => {
-  return (
+const GunItem = props => {
+  const { post } = props;
+  return  (
     <View style={styles.listitem}>
       <View style={{flexDirection:'row'}}>
-      <Image style={styles.imgCircles} source={require('../photo/GunnapatProfile.jpg')}/>
+      <Image style={styles.imgCircles} source={Images.GunnapatProfile}/>
       <Text style={{fontsize:20,fontWeight:'bold',color:'black',marginLeft:5,marginTop:10,}}>Gunnapat Yamsumroul</Text>
       <Text style={{marginTop:27,marginLeft:-144}}>1 minute ago ◦ </Text>
       <Icon style={{marginLeft:3,marginTop:30}} name="earth" size={15} />
-
+      
       <Icon style={{marginLeft:170,marginTop:-3}} name="trash" size={20} onPress={props.onDelete.bind(this, props.DeleteMessage)}/>
-
+      <Icon style={{marginLeft:-50,marginTop:0}} name="move-h-a" size={20} onPress={()=> {
+        props.setEditable(true)
+        props.setEditData(post)
+        props.setIsAddMode(true);
+      }}/>
 
       </View>
       <View style={{flexDirection:'row'}}>
 
 
-      <Text style={{fontSize:16,fontWeight:'600',marginTop:20,marginLeft:10,color:'#2A2A2A'}}>{props.header}</Text> //ส่งค่าไปยัง appjs ผ่านตัว header//
-
+      <Text style={{fontSize:16,fontWeight:'600',marginTop:20,marginLeft:10,color:'#2A2A2A'}}>{post?.type}</Text> 
+      {/* ส่งค่าไปยัง appjs ผ่านตัว header */}
 
       </View>
       <View style={{flexDiretion:'row'}}>
@@ -33,11 +38,11 @@ const Gunitem = props => {
         
       </View>
       
-    </View>
+      </View>
     </View>
     
   
-  );
+  )
 };
 
 const styles = StyleSheet.create({
@@ -60,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Gunitem;
+export default GunItem;
